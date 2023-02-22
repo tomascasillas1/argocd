@@ -1,14 +1,15 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
-metadata: 
+metadata:
   name: apps
   namespace: argocd
-spec: 
-  destination: 
+spec:
+  destination:
     namespace: appguestbook
-    server: "https://kubernetes.default.svc"
+    server: https://kubernetes.default.svc
   project: default
-  source: 
+  source:
     path: apps
     repoURL: https://github.com/tomascasillas1/argocd.git
     targetRevision: master
