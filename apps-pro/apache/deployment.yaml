@@ -2,20 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: apache
+  name: httpd-deployment-nautilus
+  namespace: httpd-namespace-nautilus
+  labels:
+    app: httpd_app_nautilus
 spec:
-  replicas: 2
-  revisionHistoryLimit: 3
+  replicas: 4
   selector:
     matchLabels:
-      app: apache
+      app: httpd_app_nautilus
   template:
     metadata:
       labels:
-        app: apache
+        app: httpd_app_nautilus
     spec:
       containers:
-        - image: httpd:latest
-          name: httpd
+        - name: httpd-container-nautilus
+          image: httpd:latest
           ports:
             - containerPort: 80
