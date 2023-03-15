@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps-pro
+  namespace: apps
+spec:
+  generators:
+    # matrix 'parent' generator
+    - matrix:
+        generators:
+          # git generator, 'child' #1
+          - git:
+              repoURL: https://github.com/tomascasillas1/argocd.git
+              revision: HEAD
+              directories:
+                - path: apps-pro/*
+          # cluster generator, 'child' #2
+          - clusters:
+              selector:
+                matchLabels:
+                  entorno: "pro"
+  template:
+    metadata:
+      name: '{{path.basename}}-{{name}}'
+    spec:
+      project: '{{metadata.labels.environment}}'
+      source:
+        repoURL: https://github.com/tomascasillas1/argocd.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: '{{server}}'
+        namespace: '{{path.basename}}'
