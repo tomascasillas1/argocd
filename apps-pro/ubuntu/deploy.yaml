@@ -15,3 +15,5 @@ spec:
       containers:
       - name: ubuntu-container
         image: ubuntu:latest
+        ports:
+           - containerPort: 80
