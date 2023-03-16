@@ -5,7 +5,7 @@ metadata:
   name: apache
   namespace: apache
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: apache
   ports:
