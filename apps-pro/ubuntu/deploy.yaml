@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ubuntu-pod
+  name: ubuntu
 spec:
   replicas: 1
   selector:
@@ -13,7 +13,6 @@ spec:
         app: ubuntu
     spec:
       containers:
-      - name: ubuntu-container
-        image: ubuntu:latest
+      - name: ubuntu
+        image: ubuntu
         ports:
-           - containerPort: 80
